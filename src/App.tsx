@@ -3,22 +3,25 @@ import Welcome from './components/Welcome'
 import Quiz from './components/Quiz'
 import Result from './components/Result'
 
+export interface PageNames {
+  welcome: 'welcome'
+  quiz: 'quiz'
+  result: 'result'
+}
+
+const pageComponents = {
+  welcome: Welcome,
+  quiz: Quiz,
+  result: Result
+}
+
 const App = () => {
-  const [currentPage, setCurrentPage] = useState('welcome')
-
-  const nextPage = (page: string) => {
-    setCurrentPage(page)
-  }
-
-  const pageComponents = {
-    welcome: Welcome,
-    quiz: Quiz,
-    result: Result
-  }
+  const [currentPage, setCurrentPage] =
+    useState<keyof typeof pageComponents>('welcome')
 
   const PageComponent = pageComponents[currentPage]
 
-  return <PageComponent nextPage={nextPage} />
+  return <PageComponent setCurrentPage={setCurrentPage} />
 }
 
 export default App

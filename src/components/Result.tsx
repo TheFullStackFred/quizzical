@@ -1,12 +1,14 @@
+import React from 'react'
 import Button from 'react-bootstrap/Button'
+import { PageNames } from '../App'
 
 interface Props {
-  nextPage: (page: string) => void
+  setCurrentPage: React.Dispatch<React.SetStateAction<keyof PageNames>>
 }
 
-const Result = ({ nextPage }: Props) => {
+const Result = ({ setCurrentPage }: Props) => {
   return (
-    <Button onClick={() => nextPage('welcome')} variant='secondary'>
+    <Button onClick={() => setCurrentPage('welcome')} variant='secondary'>
       Play Again
     </Button>
   )
