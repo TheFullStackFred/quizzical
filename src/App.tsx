@@ -1,5 +1,7 @@
+import Welcome from './components/Welcome'
+
 const App = () => {
-  return <div></div>
+  return <Welcome />
 }
 
 export default App
