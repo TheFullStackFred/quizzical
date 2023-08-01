@@ -31,7 +31,10 @@ const Quiz = ({ setCurrentPage }: Props) => {
   return (
     <Row>
       {shuffledQuestions?.map((question) => (
-        <Col className='col-12 text-primary border-bottom' key={question.id}>
+        <Col
+          className='col-12 text-primary border-bottom mb-3'
+          key={question.id}
+        >
           <h3 className='mb-3'>{question.question}</h3>
           <div className='d-flex flex-column flex-md-row'>
             {question?.answers.map((answer) => (
