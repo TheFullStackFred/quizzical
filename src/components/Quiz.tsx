@@ -12,6 +12,7 @@ interface Props {
 const Quiz = ({ setCurrentPage }: Props) => {
   const [isClicked, setIsClicked] = useState<string[]>([])
   const [allAnswered, setAllAnswered] = useState(false)
+
   const { data, error, isLoading } = useQuestions()
 
   const shuffledQuestions = data?.map((question) => ({

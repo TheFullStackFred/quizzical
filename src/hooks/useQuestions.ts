@@ -5,7 +5,7 @@ interface FetchResponse {
   results: Question[]
 }
 
-export interface Question {
+interface Question {
   question: string
   correct_answer: string
   incorrect_answers: string[]
@@ -15,7 +15,7 @@ const useQuestions = () => {
   const [data, setData] = useState<Question[]>([])
   const [error, setError] = useState('')
   const [isLoading, setLoading] = useState(false)
-  console.log(data)
+
   useEffect(() => {
     const controller = new AbortController()
 

@@ -10,16 +10,18 @@ export interface PageNames {
   result: 'result'
 }
 
-const pageComponents = {
-  welcome: Welcome,
-  quiz: Quiz,
-  result: Result
-}
-
 const App = () => {
   const [currentPage, setCurrentPage] =
     useState<keyof typeof pageComponents>('quiz')
+
+  const pageComponents = {
+    welcome: Welcome,
+    quiz: Quiz,
+    result: Result
+  }
+
   const PageComponent = pageComponents[currentPage]
+
   return (
     <Wrapper>
       <PageComponent setCurrentPage={setCurrentPage} />
