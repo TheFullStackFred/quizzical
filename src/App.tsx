@@ -18,7 +18,7 @@ const pageComponents = {
 
 const App = () => {
   const [currentPage, setCurrentPage] =
-    useState<keyof typeof pageComponents>('welcome')
+    useState<keyof typeof pageComponents>('quiz')
   const PageComponent = pageComponents[currentPage]
   return (
     <Wrapper>

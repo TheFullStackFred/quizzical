@@ -2,21 +2,20 @@ import { useEffect, useState } from 'react'
 import axios, { AxiosError, CanceledError } from 'axios'
 
 interface FetchResponse {
-  results: FetchQuestion[]
+  results: Question[]
 }
 
-interface FetchQuestion {
-  id: number
+export interface Question {
   question: string
   correct_answer: string
   incorrect_answers: string[]
 }
 
 const useQuestions = () => {
-  const [data, setData] = useState<FetchQuestion[]>([])
+  const [data, setData] = useState<Question[]>([])
   const [error, setError] = useState('')
   const [isLoading, setLoading] = useState(false)
-
+  console.log(data)
   useEffect(() => {
     const controller = new AbortController()
 

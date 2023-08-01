@@ -1,16 +1,16 @@
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-
 import { PageNames } from '../App'
 import useQuestions from '../hooks/useQuestions'
 import { useState } from 'react'
+import QuizCard from './QuizCard'
 
 interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<keyof PageNames>>
 }
 
 const Quiz = ({ setCurrentPage }: Props) => {
+  const [isClicked, setIsClicked] = useState<string[]>([])
   const [allAnswered, setAllAnswered] = useState(false)
   const { data, error, isLoading } = useQuestions()
 
@@ -31,22 +31,11 @@ const Quiz = ({ setCurrentPage }: Props) => {
   return (
     <Row>
       {shuffledQuestions?.map((question) => (
-        <Col
-          className='col-12 text-primary border-bottom mb-3'
-          key={question.id}
-        >
-          <h3 className='mb-3'>{question.question}</h3>
-          <div className='d-flex flex-column flex-md-row'>
-            {question?.answers.map((answer) => (
-              <Button
-                variant='btn btn-outline-primary mb-3 rounded-4 me-md-5 border-2'
-                key={answer}
-              >
-                {answer}
-              </Button>
-            ))}
-          </div>
-        </Col>
+        <QuizCard
+          question={question}
+          isClicked={isClicked}
+          onClickAnswer={(answer) => setIsClicked((prev) => [...prev, answer])}
+        />
       ))}
       {allAnswered && (
         <Button
