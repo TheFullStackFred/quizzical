@@ -9,6 +9,11 @@ interface Props {
 const Quiz = ({ setCurrentPage }: Props) => {
   const { data, error, isLoading } = useQuestions()
 
+  const shuffledQuestions = data.map((question) => ({
+    ...question,
+    answers: [question.correct_answer, ...question.incorrect_answers]
+  }))
+
   if (isLoading)
     return (
       <>
@@ -19,9 +24,21 @@ const Quiz = ({ setCurrentPage }: Props) => {
   if (error) return <p className='text-danger'>{error}</p>
 
   return (
-    <Button onClick={() => setCurrentPage('result')} variant='secondary'>
-      Check Answers
-    </Button>
+    <>
+      {shuffledQuestions?.map((question) => (
+        <div className='text-primary' key={question.id}>
+          <h3>{question.question}</h3>
+          {question.answers.map((answer) => (
+            <Button variant='btn btn-outline-primary' key={answer}>
+              {answer}
+            </Button>
+          ))}
+        </div>
+      ))}
+      <Button onClick={() => setCurrentPage('result')} variant='secondary'>
+        Check Answers
+      </Button>
+    </>
   )
 }
 
