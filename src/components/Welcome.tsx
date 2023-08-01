@@ -13,8 +13,7 @@ const Welcome = ({ setCurrentPage }: Props) => {
       <p className='mb-4'>Some description if needed</p>
       <Button
         onClick={() => setCurrentPage('quiz')}
-        className='px-5 py-3 rounded-4 w-100'
-        variant='secondary'
+        variant='secondary px-5 py-3 rounded-4 w-100'
         size='lg'
       >
         Start Quiz

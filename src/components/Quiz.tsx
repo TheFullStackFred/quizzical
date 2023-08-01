@@ -31,13 +31,12 @@ const Quiz = ({ setCurrentPage }: Props) => {
   return (
     <Row>
       {shuffledQuestions?.map((question) => (
-        <Col className='col-12  text-primary border-bottom' key={question.id}>
+        <Col className='col-12 text-primary border-bottom' key={question.id}>
           <h3 className='mb-3'>{question.question}</h3>
-          <div className='d-flex flex-column flex-sm-row'>
+          <div className='d-flex flex-column flex-md-row'>
             {question?.answers.map((answer) => (
               <Button
-                className='mb-3 rounded-4 me-5'
-                variant='btn btn-outline-primary'
+                variant='btn btn-outline-primary mb-3 rounded-4 me-md-5 border-2'
                 key={answer}
               >
                 {answer}
@@ -48,9 +47,8 @@ const Quiz = ({ setCurrentPage }: Props) => {
       ))}
       {allAnswered && (
         <Button
-          className='px-5 py-3 rounded-4  mt-4 mx-auto w-50 w-md-25'
           onClick={() => setCurrentPage('result')}
-          variant='secondary'
+          variant='secondary px-5 py-3 rounded-4 mt-4 mx-auto w-50 w-md-25'
         >
           Check Answers
         </Button>

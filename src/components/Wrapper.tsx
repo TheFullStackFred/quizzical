@@ -9,14 +9,14 @@ interface Props {
 
 const Wrapper = ({ children }: Props) => {
   return (
-    <Container className='d-flex d-column align-items-center justify-content-center py-3 min-vh-100'>
+    <Container className='d-flex d-column align-items-center justify-content-center min-vh-100 py-1'>
       <img
-        className='position-absolute end-0 top-0'
+        className='position-fixed end-0 top-0'
         src={yellowDot}
         alt='yellow dot'
       />
       <img
-        className='position-absolute start-0 bottom-0'
+        className='position-fixed start-0 bottom-0'
         src={blueDot}
         alt='blue dot'
       />
