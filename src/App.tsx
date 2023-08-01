@@ -19,9 +19,7 @@ const pageComponents = {
 const App = () => {
   const [currentPage, setCurrentPage] =
     useState<keyof typeof pageComponents>('welcome')
-
   const PageComponent = pageComponents[currentPage]
-
   return (
     <Wrapper>
       <PageComponent setCurrentPage={setCurrentPage} />

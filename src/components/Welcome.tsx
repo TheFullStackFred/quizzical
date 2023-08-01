@@ -10,10 +10,10 @@ const Welcome = ({ setCurrentPage }: Props) => {
   return (
     <div className='text-center'>
       <h1>Quizzical</h1>
-      <p>Some description if needed</p>
+      <p className='mb-4'>Some description if needed</p>
       <Button
         onClick={() => setCurrentPage('quiz')}
-        className='px-5 py-3 rounded-4'
+        className='px-5 py-3 rounded-4 w-100'
         variant='secondary'
         size='lg'
       >
