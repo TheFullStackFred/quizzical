@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Welcome from './components/Welcome'
 import Quiz from './components/Quiz'
 import Result from './components/Result'
+import Wrapper from './components/Wrapper'
 
 export interface PageNames {
   welcome: 'welcome'
@@ -21,7 +22,11 @@ const App = () => {
 
   const PageComponent = pageComponents[currentPage]
 
-  return <PageComponent setCurrentPage={setCurrentPage} />
+  return (
+    <Wrapper>
+      <PageComponent setCurrentPage={setCurrentPage} />
+    </Wrapper>
+  )
 }
 
 export default App

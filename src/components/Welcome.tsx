@@ -1,8 +1,6 @@
 import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
+
 import { PageNames } from '../App'
-import blueDot from '../assets/blueDot.svg'
-import yellowDot from '../assets/yellowDot.svg'
 
 interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<keyof PageNames>>
@@ -10,12 +8,7 @@ interface Props {
 
 const Welcome = ({ setCurrentPage }: Props) => {
   return (
-    <Container className='d-flex flex-column align-items-center justify-content-center text-primary h-100 gap-2 text-center'>
-      <img
-        className='position-absolute end-0 top-0'
-        src={yellowDot}
-        alt='yellow dot'
-      />
+    <div className='text-center'>
       <h1>Quizzical</h1>
       <p>Some description if needed</p>
       <Button
@@ -26,12 +19,7 @@ const Welcome = ({ setCurrentPage }: Props) => {
       >
         Start Quiz
       </Button>
-      <img
-        className='position-absolute start-0 bottom-0'
-        src={blueDot}
-        alt='blue dot'
-      />
-    </Container>
+    </div>
   )
 }
 
