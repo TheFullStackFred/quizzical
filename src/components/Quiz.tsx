@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import useQuestions from '../hooks/useQuestions'
@@ -20,6 +20,10 @@ const Quiz = ({ setCurrentPage }: Props) => {
     ...question,
     answers: [question.correct_answer, ...question.incorrect_answers]
   }))
+
+  useEffect(() => {
+    setAllAnswered(shuffledQuestions?.length === isClicked.length)
+  }, [shuffledQuestions, isClicked])
 
   if (isLoading)
     return (
