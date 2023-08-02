@@ -1,16 +1,13 @@
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import { decode } from 'html-entities'
-
-interface Question {
-  question: string
-  answers: string[]
-}
+import Question from '../interfaces/Question'
+import ClickedItem from '../interfaces/ClickedItem'
 
 interface Props {
   question: Question
-  isClicked: string[]
-  onClickAnswer: (answer: string) => void
+  isClicked: ClickedItem[]
+  onClickAnswer: ({ answer, question }: ClickedItem) => void
 }
 
 const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
@@ -23,9 +20,14 @@ const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
       <div className='d-flex flex-column flex-md-row'>
         {question?.answers.map((answer) => (
           <Button
-            onClick={() => onClickAnswer(answer)}
+            onClick={() =>
+              onClickAnswer({ answer: answer, question: question.question })
+            }
             className={`${
-              isClicked.includes(answer)
+              isClicked.some(
+                (item) =>
+                  item.answer === answer && item.question === question.question
+              )
                 ? 'btn-light border-0'
                 : 'btn-outline-primary border-2'
             } `}

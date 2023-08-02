@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button'
-import { PageNames } from '../App'
+import PageNames from '../interfaces/PageNames'
 
 interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<keyof PageNames>>

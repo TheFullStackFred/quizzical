@@ -1,16 +1,17 @@
+import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
-import { PageNames } from '../App'
 import useQuestions from '../hooks/useQuestions'
-import { useState } from 'react'
 import QuizCard from './QuizCard'
+import ClickedItem from '../interfaces/ClickedItem'
+import PageNames from '../interfaces/PageNames'
 
 interface Props {
   setCurrentPage: React.Dispatch<React.SetStateAction<keyof PageNames>>
 }
 
 const Quiz = ({ setCurrentPage }: Props) => {
-  const [isClicked, setIsClicked] = useState<string[]>([])
+  const [isClicked, setIsClicked] = useState<ClickedItem[]>([])
   const [allAnswered, setAllAnswered] = useState(false)
 
   const { data, error, isLoading } = useQuestions()

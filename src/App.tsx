@@ -11,8 +11,7 @@ export interface PageNames {
 }
 
 const App = () => {
-  const [currentPage, setCurrentPage] =
-    useState<keyof typeof pageComponents>('quiz')
+  const [currentPage, setCurrentPage] = useState<keyof PageNames>('quiz')
 
   const pageComponents = {
     welcome: Welcome,
@@ -24,7 +23,13 @@ const App = () => {
 
   return (
     <Wrapper>
-      <PageComponent setCurrentPage={setCurrentPage} />
+      <PageComponent
+        setCurrentPage={
+          setCurrentPage as React.Dispatch<
+            React.SetStateAction<keyof PageNames>
+          >
+        }
+      />
     </Wrapper>
   )
 }
