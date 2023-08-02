@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
+import { decode } from 'html-entities'
 
 interface Question {
   question: string
@@ -18,7 +19,7 @@ const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
       className='col-10 offset-1 text-primary border-bottom mb-3 text-center text-md-start'
       key={question.question}
     >
-      <h3 className='mb-3'>{question.question}</h3>
+      <h3 className='mb-3'>{decode(question.question)}</h3>
       <div className='d-flex flex-column flex-md-row'>
         {question?.answers.map((answer) => (
           <Button
