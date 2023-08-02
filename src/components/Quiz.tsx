@@ -13,6 +13,7 @@ interface Props {
 const Quiz = ({ setCurrentPage }: Props) => {
   const [isClicked, setIsClicked] = useState<ClickedItem[]>([])
   const [allAnswered, setAllAnswered] = useState(false)
+  const [correctAnswers, setCorrectAnswers] = useState(0)
 
   const { data, error, isLoading } = useQuestions()
 
@@ -21,8 +22,23 @@ const Quiz = ({ setCurrentPage }: Props) => {
     answers: [question.correct_answer, ...question.incorrect_answers]
   }))
 
+  const checkAnswers = () => {
+    isClicked.filter((answer) => {
+      const question = shuffledQuestions.find(
+        (question) => question.question === answer.question
+      )
+      if (question?.correct_answer === answer.answer) {
+        setCorrectAnswers((prev) => prev + 1)
+      }
+    })
+    setCurrentPage('result')
+  }
+
   useEffect(() => {
-    setAllAnswered(shuffledQuestions?.length === isClicked.length)
+    setAllAnswered(
+      shuffledQuestions.length === isClicked.length &&
+        shuffledQuestions.length !== 0
+    )
   }, [shuffledQuestions, isClicked])
 
   if (isLoading)
@@ -45,7 +61,7 @@ const Quiz = ({ setCurrentPage }: Props) => {
       ))}
       {allAnswered && (
         <Button
-          onClick={() => setCurrentPage('result')}
+          onClick={checkAnswers}
           variant='secondary px-5 py-3 rounded-4 mt-4 mx-auto w-50 w-md-25'
         >
           Check Answers

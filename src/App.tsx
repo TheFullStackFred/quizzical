@@ -11,7 +11,7 @@ export interface PageNames {
 }
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState<keyof PageNames>('quiz')
+  const [currentPage, setCurrentPage] = useState<keyof PageNames>('welcome')
 
   const pageComponents = {
     welcome: Welcome,
