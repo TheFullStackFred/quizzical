@@ -15,7 +15,7 @@ interface Props {
 const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
   return (
     <Col
-      className='col-12 text-primary border-bottom mb-3'
+      className='col-10 offset-1 text-primary border-bottom mb-3 text-center text-md-start'
       key={question.question}
     >
       <h3 className='mb-3'>{question.question}</h3>
