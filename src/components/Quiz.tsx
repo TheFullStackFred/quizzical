@@ -4,17 +4,13 @@ import Row from 'react-bootstrap/Row'
 import useQuestions from '../hooks/useQuestions'
 import QuizCard from './QuizCard'
 import ClickedItem from '../interfaces/ClickedItem'
-import PageNames from '../interfaces/PageNames'
 
-interface Props {
-  setCurrentPage: React.Dispatch<React.SetStateAction<keyof PageNames>>
-}
-
-const Quiz = ({ setCurrentPage }: Props) => {
+const Quiz = () => {
   const [isClicked, setIsClicked] = useState<ClickedItem[]>([])
   const [allAnswered, setAllAnswered] = useState(false)
-  const [correctAnswers, setCorrectAnswers] = useState(0)
-
+  const [showTotal, setShowTotal] = useState(false)
+  const [total, setTotal] = useState(0)
+  console.log(showTotal)
   const { data, error, isLoading } = useQuestions()
 
   const shuffledQuestions = data?.map((question) => ({
@@ -28,10 +24,10 @@ const Quiz = ({ setCurrentPage }: Props) => {
         (question) => question.question === answer.question
       )
       if (question?.correct_answer === answer.answer) {
-        setCorrectAnswers((prev) => prev + 1)
+        setTotal((prev) => prev + 1)
       }
     })
-    setCurrentPage('result')
+    setShowTotal(true)
   }
 
   useEffect(() => {
@@ -59,14 +55,22 @@ const Quiz = ({ setCurrentPage }: Props) => {
           onClickAnswer={(answer) => setIsClicked((prev) => [...prev, answer])}
         />
       ))}
-      {allAnswered && (
-        <Button
-          onClick={checkAnswers}
-          variant='secondary px-5 py-3 rounded-4 mt-4 mx-auto w-50 w-md-25'
-        >
-          Check Answers
-        </Button>
-      )}
+      <div className='col-10 offset-1 d-flex justify-content-around align-items-center'>
+        {showTotal && (
+          <h5 className='text-primary fw-bold'>
+            You scored {total}/5 correct answers
+          </h5>
+        )}
+
+        {allAnswered && (
+          <Button
+            onClick={checkAnswers}
+            variant='secondary px-5 py-3 rounded-4'
+          >
+            Check Answers
+          </Button>
+        )}
+      </div>
     </Row>
   )
 }

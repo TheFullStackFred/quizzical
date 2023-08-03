@@ -1,22 +1,15 @@
 import { useState } from 'react'
+import PageNames from './interfaces/PageNames'
 import Welcome from './components/Welcome'
 import Quiz from './components/Quiz'
-import Result from './components/Result'
 import Wrapper from './components/Wrapper'
-
-export interface PageNames {
-  welcome: 'welcome'
-  quiz: 'quiz'
-  result: 'result'
-}
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState<keyof PageNames>('welcome')
 
   const pageComponents = {
     welcome: Welcome,
-    quiz: Quiz,
-    result: Result
+    quiz: Quiz
   }
 
   const PageComponent = pageComponents[currentPage]
