@@ -1,14 +1,22 @@
 import Button from 'react-bootstrap/Button'
 
 interface Props {
+  key?: string
   title: string
-  onClick: () => void
-  variant: string
+  onClick?: () => void
+  className?: string
+  variant?: string
 }
 
-const CustomButton = ({ title, onClick, variant }: Props) => {
+const CustomButton = ({
+  key,
+  title,
+  className,
+  variant = 'secondary px-5 py-3 rounded-4',
+  onClick
+}: Props) => {
   return (
-    <Button onClick={onClick} variant={variant}>
+    <Button key={key} className={className} variant={variant} onClick={onClick}>
       {title}
     </Button>
   )

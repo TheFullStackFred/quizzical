@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react'
-import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import useQuestions from '../hooks/useQuestions'
 import QuizCard from './QuizCard'
 import CustomButton from './CustomButton'
 import ClickedItem from '../interfaces/ClickedItem'
+import PageNames from '../interfaces/PageNames'
 
-const Quiz = () => {
+interface Props {
+  setCurrentPage: React.Dispatch<React.SetStateAction<keyof PageNames>>
+}
+
+const Quiz = ({ setCurrentPage }: Props) => {
   const [isClicked, setIsClicked] = useState<ClickedItem[]>([])
   const [allAnswered, setAllAnswered] = useState(false)
+  const [answersChecked, setAnswersChecked] = useState(false)
   const [showTotal, setShowTotal] = useState(false)
   const [total, setTotal] = useState(0)
-  console.log(allAnswered)
+
   const { data, error, isLoading } = useQuestions()
 
   const shuffledQuestions = data?.map((question) => ({
@@ -29,6 +34,7 @@ const Quiz = () => {
       }
     })
     setShowTotal(true)
+    setAnswersChecked(true)
   }
 
   useEffect(() => {
@@ -51,24 +57,28 @@ const Quiz = () => {
     <Row>
       {shuffledQuestions?.map((question) => (
         <QuizCard
+          key={question.question}
           question={question}
           isClicked={isClicked}
           onClickAnswer={(answer) => setIsClicked((prev) => [...prev, answer])}
         />
       ))}
-      <div className='col-10 offset-1 d-flex justify-content-around align-items-center'>
+      <div className='col-10 offset-1 d-flex flex-column flex-md-row justify-content-around align-items-center'>
         {showTotal && (
-          <h5 className='text-primary fw-bold'>
+          <h5 className='text-primary fw-bold text-center'>
             You scored {total}/5 correct answers
           </h5>
         )}
 
-        {allAnswered && (
+        {allAnswered && !answersChecked && (
+          <CustomButton title='Check Answers' onClick={checkAnswers} />
+        )}
+
+        {answersChecked && (
           <CustomButton
-            title='Check Answers'
-            onClick={checkAnswers}
-            variant='secondary px-5 py-3 rounded-4'
-          ></CustomButton>
+            title='Play Again'
+            onClick={() => setCurrentPage('welcome')}
+          />
         )}
       </div>
     </Row>

@@ -1,9 +1,8 @@
-import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import { decode } from 'html-entities'
 import Question from '../interfaces/Question'
 import ClickedItem from '../interfaces/ClickedItem'
-
+import CustomButton from './CustomButton'
 interface Props {
   question: Question
   isClicked: ClickedItem[]
@@ -12,17 +11,12 @@ interface Props {
 
 const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
   return (
-    <Col
-      className='col-10 offset-1 text-primary border-bottom mb-3 text-center text-md-start'
-      key={question.question}
-    >
+    <Col className='col-10 offset-1 text-primary border-bottom mb-3 text-center text-md-start'>
       <h3 className='mb-3'>{decode(question.question)}</h3>
       <div className='d-flex flex-column flex-md-row'>
         {question?.answers.map((answer) => (
-          <Button
-            onClick={() =>
-              onClickAnswer({ answer: answer, question: question.question })
-            }
+          <CustomButton
+            title={decode(answer)}
             className={`${
               isClicked.some(
                 (item) =>
@@ -32,10 +26,11 @@ const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
                 : 'btn-outline-primary border-2'
             } `}
             variant='btn mb-3 rounded-4 me-md-5 '
+            onClick={() =>
+              onClickAnswer({ answer: answer, question: question.question })
+            }
             key={answer}
-          >
-            {answer}
-          </Button>
+          />
         ))}
       </div>
     </Col>
