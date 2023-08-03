@@ -16,6 +16,7 @@ const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
       <div className='d-flex flex-column flex-md-row'>
         {question?.answers.map((answer) => (
           <CustomButton
+            key={answer}
             title={decode(answer)}
             className={`${
               isClicked.some(
@@ -29,7 +30,6 @@ const QuizCard = ({ question, isClicked, onClickAnswer }: Props) => {
             onClick={() =>
               onClickAnswer({ answer: answer, question: question.question })
             }
-            key={answer}
           />
         ))}
       </div>
