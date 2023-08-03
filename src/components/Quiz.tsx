@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import useQuestions from '../hooks/useQuestions'
 import QuizCard from './QuizCard'
+import CustomButton from './CustomButton'
 import ClickedItem from '../interfaces/ClickedItem'
 
 const Quiz = () => {
@@ -10,7 +11,7 @@ const Quiz = () => {
   const [allAnswered, setAllAnswered] = useState(false)
   const [showTotal, setShowTotal] = useState(false)
   const [total, setTotal] = useState(0)
-  console.log(showTotal)
+  console.log(allAnswered)
   const { data, error, isLoading } = useQuestions()
 
   const shuffledQuestions = data?.map((question) => ({
@@ -63,12 +64,11 @@ const Quiz = () => {
         )}
 
         {allAnswered && (
-          <Button
+          <CustomButton
+            title='Check Answers'
             onClick={checkAnswers}
             variant='secondary px-5 py-3 rounded-4'
-          >
-            Check Answers
-          </Button>
+          ></CustomButton>
         )}
       </div>
     </Row>
