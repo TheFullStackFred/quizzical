@@ -24,6 +24,20 @@ const Quiz = ({ setCurrentPage }: Props) => {
     answers: [question.correct_answer, ...question.incorrect_answers]
   }))
 
+  const onClickAnswer = ({ answer, question }: ClickedItem) => {
+    const isAnswered = isClicked.some((item) => item.question === question)
+
+    if (isAnswered) {
+      setIsClicked((prev) =>
+        prev.map((item) =>
+          item.question === question ? { ...item, answer } : item
+        )
+      )
+    } else {
+      setIsClicked((prev) => [...prev, { answer, question }])
+    }
+  }
+
   const checkAnswers = () => {
     isClicked.filter((answer) => {
       const question = shuffledQuestions.find(
@@ -60,7 +74,7 @@ const Quiz = ({ setCurrentPage }: Props) => {
           key={question.question}
           question={question}
           isClicked={isClicked}
-          onClickAnswer={(answer) => setIsClicked((prev) => [...prev, answer])}
+          onClickAnswer={onClickAnswer}
         />
       ))}
       <div className='col-10 offset-1 d-flex flex-column flex-md-row justify-content-around align-items-center'>

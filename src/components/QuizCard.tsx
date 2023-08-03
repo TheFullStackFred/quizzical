@@ -3,6 +3,7 @@ import { decode } from 'html-entities'
 import Question from '../interfaces/Question'
 import ClickedItem from '../interfaces/ClickedItem'
 import CustomButton from './CustomButton'
+
 interface Props {
   question: Question
   isClicked: ClickedItem[]
