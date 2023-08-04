@@ -18,13 +18,14 @@ const QuizCard = ({
   onClickAnswer
 }: Props) => {
   const isAnswerCorrect = (answer: string) => {
-    return (
-      answersChecked &&
-      isClicked.some(
-        (item) => item.answer === answer && item.question === question.question
-      ) &&
-      answer === question.correct_answer
+    return answer === question.correct_answer
+  }
+
+  const isAnswerWrong = (answer: string) => {
+    const clickedItem = isClicked.find(
+      (item) => item.answer === answer && item.question === question.question
     )
+    return answersChecked && clickedItem && !isAnswerCorrect(answer)
   }
 
   return (
@@ -45,8 +46,10 @@ const QuizCard = ({
             } ${
               answersChecked
                 ? isAnswerCorrect(answer)
-                  ? 'bg-success'
-                  : 'bg-danger'
+                  ? 'text-bg-success border-0'
+                  : isAnswerWrong(answer)
+                  ? 'text-bg-danger'
+                  : ''
                 : ''
             }`}
             variant='btn mb-3 rounded-4 me-md-5 '
