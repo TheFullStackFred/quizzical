@@ -74,6 +74,7 @@ const Quiz = ({ setCurrentPage }: Props) => {
           key={question.question}
           question={question}
           isClicked={isClicked}
+          answersChecked={answersChecked}
           onClickAnswer={onClickAnswer}
         />
       ))}
